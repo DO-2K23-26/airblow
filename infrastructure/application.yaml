@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresql-ha
+  namespace: argocd  # Or the namespace where Argo CD is installed
+spec:
+  project: default
+
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'  # Example: Bitnami Helm chart repository
+    targetRevision: 14.2.34
+    chart: postgresql-ha
+    helm:
+      values: |
+        postgresql:
+          replicaCount: 3
+        replication:
+          enabled: true
+          readReplicas: 1
+
+  destination:
+    server: https://kubernetes.default.svc  # The Kubernetes API server address
+    namespace: airflow  # Namespace where PostgreSQL will be deployed
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
