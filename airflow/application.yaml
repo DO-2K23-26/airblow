@@ -51,6 +51,15 @@ spec:
           user: postgres
           passwordSecret: "postgresql-ha-postgresql"
           passwordSecretKey: "password"
+        dags:
+          gitSync:
+            branch: main
+            ref: main
+            enabled: true
+            repo: git@github.com:DO-2K23-26/airblow.git
+            sshKeySecret: airflow-ssh-key
+            knownHosts: |
+              hugo@pc-hugo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP2SC+rkvHIFOQ3yxrUzkizLgs3t9xxQiuxuG67vX808wLDaU448J92BCb2aMMu2RUqSOpP9w0cb9QgFIN72oegVDekejKEhRfmO3VqQpZ4qTzcR7lWTXHGULo6h+L5haPHVJbXROKnFdZbd1qFxiJI4uptTz85VIV9pvJ3y2aHTGOiyTZEh8A3qYZtgEU+fEQojsbWjLyLviBUQxL+cm1hIvjfQKvNf5GLq4Rqw2kC+TlszS8YoS2WFBMp9qOJqbuL1ufYJY9oacfFE2l7l+t5eqmuXTI6tkoOJUwV2dcaRtdAO67tbLHa3FXMVgfTiC3g47gEf7QZVNDsQo5pQKp1zXgpiERKkjs1FWk5GjP1mC1dByzHCZnxHrbIJUiqyqo5rFBaefgkAiiNyZKzGnsErCRhTuYFCcJu2fhOzQ0iZjHA0NgOrMQy/yq9TIzQ9qIIae7mPdSHXI1+0bdF3NATSv0onzQxb/kU/xXJ8tByFu4Tep+Uq0D0gP7b4h34k8=
           
   destination:
     server: https://kubernetes.default.svc
